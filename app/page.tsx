@@ -71,6 +71,7 @@ export default function Home() {
 
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.currentPlayer, gameState.passes, showWelcome]);
 
   // Manejar clic en celda
