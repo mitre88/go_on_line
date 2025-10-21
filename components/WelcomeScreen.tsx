@@ -184,17 +184,19 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           </p>
 
           {/* Botón de donación */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex justify-center"
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(251, 146, 60, 0.4)" }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => window.open('https://donate.stripe.com/3cs8xpbHK7AU7VK7ss', '_blank')}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 hover:from-orange-600 hover:via-amber-600 hover:to-yellow-600 text-white shadow-xl transition-all duration-300"
           >
-            <stripe-buy-button
-              buy-button-id="buy_btn_1SKWTyInFlCxLEjixOOcQ0LB"
-              publishable-key="pk_live_51OW7IQInFlCxLEjiUG8UMw8uYt8Sq241SWwXdTs8Csc2eBLzDyfKzKDMOwjP06h1rzLTBnaHAdjWqK8mVuHP2VSY00vBjzbOlw"
-            />
-          </motion.div>
+            <span className="text-2xl">☕</span>
+            <span>Apóyame con un Café</span>
+            <span className="text-xl">💝</span>
+          </motion.button>
         </motion.div>
       </div>
     </div>

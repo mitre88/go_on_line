@@ -130,17 +130,19 @@ export default function GameInfo({ gameState, onPass, onNewGame, isAiThinking }:
         </button>
 
         {/* Botón de donación */}
-        <motion.div
+        <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="flex justify-center w-full"
+          whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(251, 146, 60, 0.4)" }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => window.open('https://donate.stripe.com/3cs8xpbHK7AU7VK7ss', '_blank')}
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-bold bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 hover:from-orange-600 hover:via-amber-600 hover:to-yellow-600 text-white shadow-lg transition-all duration-300"
         >
-          <stripe-buy-button
-            buy-button-id="buy_btn_1SKWTyInFlCxLEjixOOcQ0LB"
-            publishable-key="pk_live_51OW7IQInFlCxLEjiUG8UMw8uYt8Sq241SWwXdTs8Csc2eBLzDyfKzKDMOwjP06h1rzLTBnaHAdjWqK8mVuHP2VSY00vBjzbOlw"
-          />
-        </motion.div>
+          <span className="text-xl">☕</span>
+          <span>Apóyame</span>
+          <span className="text-lg">💝</span>
+        </motion.button>
       </motion.div>
 
       {/* Mensaje de fin de juego */}
