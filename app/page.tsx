@@ -40,7 +40,19 @@ export default function Home() {
         body: JSON.stringify(state),
       });
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error API response:', errorData);
+        showNotification(`Error: ${errorData.error || 'No se pudo conectar con la IA. Verifica la configuración del servidor.'}`);
+        return;
+      }
+
       const data = await response.json();
+
+      if (data.error) {
+        showNotification(`Error: ${data.error}`);
+        return;
+      }
 
       if (data.pass) {
         // IA pasa
@@ -55,7 +67,7 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error getting AI move:', error);
-      showNotification('Error: IA no pudo hacer movimiento');
+      showNotification('Error: No se pudo conectar con la IA. Verifica la configuración del servidor.');
     } finally {
       setIsAiThinking(false);
     }

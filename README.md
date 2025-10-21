@@ -72,10 +72,38 @@ vercel
 
 **IMPORTANTE**: Nunca subas tu archivo `.env.local` a Git. Las API keys deben configurarse en Vercel:
 
-1. Ve a tu proyecto en Vercel
-2. Settings → Environment Variables
-3. Agrega: `ANTHROPIC_API_KEY` con tu API key
-4. Aplica a: Production, Preview, Development
+1. Ve a tu proyecto en Vercel Dashboard: https://vercel.com/dashboard
+2. Selecciona tu proyecto "go_on_line"
+3. Ve a Settings → Environment Variables
+4. Haz clic en "Add New"
+5. Agrega:
+   - **Key**: `ANTHROPIC_API_KEY`
+   - **Value**: tu API key de Anthropic (obtén una en https://console.anthropic.com/)
+   - **Environments**: Marca Production, Preview, y Development
+6. Haz clic en "Save"
+7. **IMPORTANTE**: Redeploy tu aplicación después de agregar la variable:
+   - Ve a Deployments
+   - Haz clic en los tres puntos (...) del deployment más reciente
+   - Selecciona "Redeploy"
+
+## Troubleshooting
+
+### Error: "Application error: a client-side exception has occurred"
+
+Este error aparece cuando las variables de entorno no están configuradas en Vercel:
+
+**Solución:**
+1. Verifica que la variable `ANTHROPIC_API_KEY` esté configurada en Vercel (ver sección anterior)
+2. Asegúrate de haber hecho **Redeploy** después de agregar la variable
+3. Verifica en la consola del navegador el error específico (F12 → Console)
+4. Si el problema persiste, verifica que tu API key sea válida en https://console.anthropic.com/
+
+### Error: "No se pudo conectar con la IA"
+
+Si ves este mensaje en la aplicación:
+- Verifica que la variable `ANTHROPIC_API_KEY` esté correctamente configurada
+- Verifica que tu API key tenga créditos disponibles en Anthropic
+- Revisa los logs en Vercel Dashboard → Deployment → Runtime Logs
 
 ## Reglas del Juego
 
