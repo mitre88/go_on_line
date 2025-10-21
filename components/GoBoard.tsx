@@ -10,7 +10,8 @@ interface GoBoardProps {
 }
 
 export default function GoBoard({ gameState, onCellClick, isAiThinking }: GoBoardProps) {
-  const cellSize = 50; // tamaño de cada celda en píxeles
+  const cellSize = 55; // tamaño de cada celda en píxeles
+  const stoneSize = 44; // tamaño de las piedras (80% del cellSize)
 
   return (
     <div className="relative">
@@ -83,42 +84,44 @@ export default function GoBoard({ gameState, onCellClick, isAiThinking }: GoBoar
                   key={`${rowIndex}-${colIndex}`}
                   className="absolute cursor-pointer"
                   style={{
-                    top: rowIndex * cellSize,
-                    left: colIndex * cellSize,
-                    width: cellSize,
-                    height: cellSize,
+                    top: rowIndex * cellSize + cellSize / 2 - stoneSize / 2,
+                    left: colIndex * cellSize + cellSize / 2 - stoneSize / 2,
+                    width: stoneSize,
+                    height: stoneSize,
                   }}
                   onClick={() => !isAiThinking && onCellClick({ row: rowIndex, col: colIndex })}
                 >
-                  {/* Área de clic */}
-                  <div className="w-full h-full flex items-center justify-center hover:bg-yellow-400 hover:bg-opacity-20 rounded-full transition-colors">
-                    {cell && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                        className={`go-stone ${
-                          cell === 'black' ? 'go-stone-black' : 'go-stone-white'
-                        }`}
-                        style={{
-                          width: cellSize * 0.8,
-                          height: cellSize * 0.8,
-                          position: 'relative',
-                        }}
-                      >
-                        {/* Indicador de último movimiento */}
-                        {isLastMove && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className={`absolute inset-0 m-auto w-3 h-3 rounded-full ${
-                              cell === 'black' ? 'bg-white' : 'bg-black'
-                            }`}
-                          />
-                        )}
-                      </motion.div>
-                    )}
-                  </div>
+                  {/* Área de clic e indicador hover */}
+                  <div className="absolute inset-0 -m-2 hover:bg-yellow-400 hover:bg-opacity-30 rounded-full transition-colors" />
+
+                  {/* Piedra */}
+                  {cell && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                      className={`go-stone ${
+                        cell === 'black' ? 'go-stone-black' : 'go-stone-white'
+                      }`}
+                      style={{
+                        width: stoneSize,
+                        height: stoneSize,
+                        position: 'relative',
+                        zIndex: 10,
+                      }}
+                    >
+                      {/* Indicador de último movimiento */}
+                      {isLastMove && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className={`absolute inset-0 m-auto w-3 h-3 rounded-full ${
+                            cell === 'black' ? 'bg-white' : 'bg-black'
+                          }`}
+                        />
+                      )}
+                    </motion.div>
+                  )}
                 </div>
               );
             })
