@@ -190,7 +190,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
             transition={{ delay: 0.2 }}
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(251, 146, 60, 0.4)" }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => window.open('https://donate.stripe.com/3cs8xpbHK7AU7VK7ss', '_blank')}
+            onClick={() => window.open('https://buy.stripe.com/9B63cvcLObRc8ZJ81bfbq0b', '_blank')}
             className="inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 hover:from-orange-600 hover:via-amber-600 hover:to-yellow-600 text-white shadow-xl transition-all duration-300"
           >
             <span className="text-2xl">☕</span>
