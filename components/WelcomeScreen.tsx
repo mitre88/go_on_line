@@ -13,9 +13,20 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
   useEffect(() => {
     // Cargar estadísticas
     fetch('/api/stats')
-      .then(res => res.json())
-      .then(data => setStats(data))
-      .catch(console.error);
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch stats');
+        return res.json();
+      })
+      .then(data => {
+        // Asegurar que data tiene las propiedades necesarias
+        if (data && typeof data.totalGames === 'number' && typeof data.totalPlayers === 'number') {
+          setStats(data);
+        }
+      })
+      .catch(err => {
+        console.error('Error loading stats:', err);
+        // Mantener valores por defecto
+      });
   }, []);
 
   const handleStart = async () => {
@@ -119,13 +130,13 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           <div className="grid grid-cols-2 gap-6 text-center">
             <div>
               <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {stats.totalGames.toLocaleString()}
+                {(stats?.totalGames ?? 0).toLocaleString()}
               </div>
               <div className="text-sm text-gray-400">Partidas Jugadas</div>
             </div>
             <div>
               <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                {stats.totalPlayers.toLocaleString()}
+                {(stats?.totalPlayers ?? 0).toLocaleString()}
               </div>
               <div className="text-sm text-gray-400">Jugadores Totales</div>
             </div>
