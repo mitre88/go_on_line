@@ -169,7 +169,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2 }}
-          className="text-center mt-12"
+          className="text-center mt-12 space-y-4"
         >
           <p className="text-sm text-gray-400">
             Desarrollado por{' '}
@@ -182,6 +182,19 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
               Nex-Tech-IA
             </a>
           </p>
+
+          {/* Botón de donación */}
+          <motion.a
+            href="https://buy.stripe.com/7sYdR95jm2gCb7R4OZfbq08"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl text-white"
+          >
+            <span className="text-xl">☕</span>
+            Invítame un café
+          </motion.a>
         </motion.div>
       </div>
     </div>

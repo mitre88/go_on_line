@@ -128,6 +128,19 @@ export default function GameInfo({ gameState, onPass, onNewGame, isAiThinking }:
         <button onClick={onNewGame} className="button-primary w-full">
           Nuevo Juego
         </button>
+
+        {/* Botón de donación */}
+        <motion.a
+          href="https://buy.stripe.com/7sYdR95jm2gCb7R4OZfbq08"
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl text-white"
+        >
+          <span className="text-lg">☕</span>
+          <span className="text-sm">Invítame un café</span>
+        </motion.a>
       </motion.div>
 
       {/* Mensaje de fin de juego */}
