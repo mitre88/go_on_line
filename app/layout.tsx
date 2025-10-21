@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="es">
       <head>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>囲</text></svg>" />
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
       </head>
       <body>{children}</body>
     </html>
