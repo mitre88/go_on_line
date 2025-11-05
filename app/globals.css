@@ -7,63 +7,132 @@
 }
 
 body {
-  @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900;
+  @apply bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900;
   @apply min-h-screen;
   @apply text-white;
+  background-attachment: fixed;
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @layer components {
   .go-stone {
     @apply rounded-full shadow-lg transition-all duration-300;
     @apply hover:scale-110 cursor-pointer;
+    position: relative;
+  }
+
+  .go-stone::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 30%;
+    height: 30%;
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
   }
 
   .go-stone-black {
-    @apply bg-gradient-to-br from-gray-800 to-black;
-    @apply shadow-xl;
+    @apply bg-gradient-to-br from-gray-700 via-gray-900 to-black;
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.4),
+      0 10px 20px rgba(0, 0, 0, 0.3),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  }
+
+  .go-stone-black:hover {
+    box-shadow:
+      0 6px 12px rgba(0, 0, 0, 0.5),
+      0 15px 30px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(168, 85, 247, 0.3),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(255, 255, 255, 0.2);
   }
 
   .go-stone-white {
-    @apply bg-gradient-to-br from-white to-gray-200;
-    @apply shadow-xl;
+    @apply bg-gradient-to-br from-gray-50 via-white to-gray-100;
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.2),
+      0 10px 20px rgba(0, 0, 0, 0.15),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 2px 6px rgba(255, 255, 255, 0.9);
+  }
+
+  .go-stone-white:hover {
+    box-shadow:
+      0 6px 12px rgba(0, 0, 0, 0.3),
+      0 15px 30px rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(236, 72, 153, 0.4),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 2px 6px rgba(255, 255, 255, 1);
   }
 
   .go-board-cell {
     @apply relative flex items-center justify-center;
-    @apply transition-colors duration-200;
+    @apply transition-all duration-300;
   }
 
   .go-board-cell:hover {
-    @apply bg-amber-600 bg-opacity-20;
+    @apply bg-amber-400 bg-opacity-25;
+    transform: scale(1.05);
+    border-radius: 50%;
   }
 
   .go-board-line {
-    @apply absolute bg-black;
+    @apply absolute bg-gradient-to-r from-amber-900 via-amber-950 to-amber-900;
   }
 
   .button-primary {
-    @apply px-6 py-3 rounded-lg font-semibold;
-    @apply bg-gradient-to-r from-purple-600 to-pink-600;
-    @apply hover:from-purple-700 hover:to-pink-700;
+    @apply px-6 py-3 rounded-xl font-bold;
+    @apply bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600;
+    @apply hover:from-purple-500 hover:via-pink-500 hover:to-purple-500;
     @apply transition-all duration-300;
-    @apply shadow-lg hover:shadow-xl;
-    @apply transform hover:scale-105;
+    @apply shadow-lg hover:shadow-neon-purple;
+    @apply transform hover:scale-105 active:scale-95;
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
   }
 
   .button-secondary {
-    @apply px-6 py-3 rounded-lg font-semibold;
-    @apply bg-gradient-to-r from-blue-600 to-cyan-600;
-    @apply hover:from-blue-700 hover:to-cyan-700;
+    @apply px-6 py-3 rounded-xl font-bold;
+    @apply bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600;
+    @apply hover:from-blue-500 hover:via-cyan-500 hover:to-blue-500;
     @apply transition-all duration-300;
-    @apply shadow-lg hover:shadow-xl;
-    @apply transform hover:scale-105;
+    @apply shadow-lg hover:shadow-neon-cyan;
+    @apply transform hover:scale-105 active:scale-95;
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
   }
 
   .card {
     @apply bg-white bg-opacity-10 backdrop-blur-lg;
     @apply rounded-2xl p-6;
-    @apply border border-white border-opacity-20;
+    @apply border border-white border-opacity-30;
     @apply shadow-2xl;
+    @apply transition-all duration-300;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  }
+
+  .card:hover {
+    @apply border-opacity-50;
+    @apply shadow-neon-purple;
+    transform: translateY(-2px);
   }
 }
 
