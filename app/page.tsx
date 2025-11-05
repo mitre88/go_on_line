@@ -142,41 +142,96 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen p-4 md:p-8 relative overflow-hidden">
+      {/* Partículas flotantes decorativas */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white rounded-full opacity-20"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 20 - 10, 0],
+              opacity: [0.1, 0.3, 0.1],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-8"
         >
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+          <motion.h1
+            animate={{
+              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+            className="text-6xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-3"
+            style={{ backgroundSize: '200% auto' }}
+          >
             GO Online
-          </h1>
-          <p className="text-gray-400">
+          </motion.h1>
+          <p className="text-gray-300 flex items-center justify-center gap-2">
+            <span className="text-lg">🎨</span>
             Desarrollado por{' '}
             <a
               href="https://nex-tech-ia.replit.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-400 hover:text-purple-300 transition-colors"
+              className="text-purple-400 hover:text-pink-400 transition-colors font-semibold underline decoration-wavy"
             >
               Nex-Tech-IA
             </a>
+            <span className="text-lg">✨</span>
           </p>
         </motion.div>
 
-        {/* Notificaciones */}
+        {/* Notificaciones mejoradas */}
         {notification && (
           <motion.div
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -100, opacity: 0 }}
-            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"
+            initial={{ y: -100, opacity: 0, scale: 0.8 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -100, opacity: 0, scale: 0.8 }}
+            className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
           >
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg shadow-lg">
-              {notification}
-            </div>
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 20px rgba(168, 85, 247, 0.5)',
+                  '0 0 40px rgba(236, 72, 153, 0.7)',
+                  '0 0 20px rgba(168, 85, 247, 0.5)',
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white px-8 py-4 rounded-2xl shadow-2xl backdrop-blur-sm border-2 border-white/20"
+              style={{ backgroundSize: '200% 100%' }}
+            >
+              <motion.div
+                animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                style={{ backgroundSize: '200% 100%' }}
+              />
+              <p className="relative z-10 font-bold text-lg flex items-center gap-2">
+                <span className="text-2xl">💬</span>
+                {notification}
+              </p>
+            </motion.div>
           </motion.div>
         )}
 
@@ -211,21 +266,53 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Instrucciones */}
+        {/* Instrucciones mejoradas */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-8 card max-w-3xl mx-auto"
+          className="mt-12 card max-w-3xl mx-auto relative overflow-hidden"
         >
-          <h2 className="text-xl font-semibold mb-3">Cómo Jugar</h2>
-          <ul className="space-y-2 text-sm text-gray-300">
-            <li>• <strong>Objetivo:</strong> Controlar más territorio que tu oponente</li>
-            <li>• <strong>Colocar piedras:</strong> Haz clic en una intersección vacía</li>
-            <li>• <strong>Capturar:</strong> Rodea completamente las piedras del oponente para capturarlas</li>
-            <li>• <strong>Pasar:</strong> Si no tienes movimiento, puedes pasar tu turno</li>
-            <li>• <strong>Fin del juego:</strong> Cuando ambos jugadores pasan consecutivamente</li>
-          </ul>
+          <motion.div
+            className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+          />
+          <div className="relative z-10">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+              <span className="text-3xl">📖</span>
+              Cómo Jugar
+              <span className="text-3xl">🎮</span>
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {[
+                { emoji: '🎯', title: 'Objetivo', desc: 'Controlar más territorio que tu oponente' },
+                { emoji: '🖱️', title: 'Colocar piedras', desc: 'Haz clic en una intersección vacía' },
+                { emoji: '⚔️', title: 'Capturar', desc: 'Rodea completamente las piedras del oponente' },
+                { emoji: '⏭️', title: 'Pasar', desc: 'Si no tienes movimiento, puedes pasar tu turno' },
+                { emoji: '🏁', title: 'Fin del juego', desc: 'Cuando ambos jugadores pasan consecutivamente' },
+                { emoji: '🏆', title: 'Victoria', desc: 'El jugador con más puntos (territorio + capturas) gana' },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 + i * 0.1 }}
+                  whileHover={{ scale: 1.03, x: 5 }}
+                  className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-white/5 to-transparent border border-white/10 hover:border-purple-400/30 transition-all"
+                >
+                  <span className="text-3xl flex-shrink-0">{item.emoji}</span>
+                  <div>
+                    <h3 className="font-bold text-white mb-1">{item.title}</h3>
+                    <p className="text-sm text-gray-300">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>
